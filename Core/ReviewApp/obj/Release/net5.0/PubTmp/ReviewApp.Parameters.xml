@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="IIS Web Application Name" description="" value="bcarrion-fb-messenger-bot" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\bradl\\Desktop\\Connectly\\fb-messenger-review-bot\\Core\\ReviewApp\\ReviewApp\\obj\\Release\\net5\.0\\PubTmp\\Out\\$" />
-  </parameter>
-</parameters>
