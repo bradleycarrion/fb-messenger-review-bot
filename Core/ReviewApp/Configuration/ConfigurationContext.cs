@@ -18,5 +18,9 @@ namespace ReviewApp.Configuration
         }
 
         public string FacebookVerificationToken => _configuration.GetValue<string>(Constants.FacebookVerificationToken);
+
+        public string FacebookMessengerSendAPIAccessToken => _configuration.GetValue<string>(Constants.FacebookMessengerSendAPIAccessToken);
+
+        public string FacebookAppSecret => _configuration.GetValue<string>(Constants.FacebookAppSecret);
     }
 }

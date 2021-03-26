@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ReviewApp.Authorization;
 using ReviewApp.Configuration;
 
 namespace ReviewApp.Common
@@ -9,6 +10,7 @@ namespace ReviewApp.Common
              this IServiceCollection services)
         {
             services.AddTransient<IConfigurationContext, ConfigurationContext>();
+            services.AddTransient<IAuthorizationService, FacebookWebhookAuthorizationService>();
 
             return services;
         }

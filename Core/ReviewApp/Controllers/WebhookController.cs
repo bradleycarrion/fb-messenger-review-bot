@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using ReviewApp.Authorization;
 using ReviewApp.Common;
 using ReviewApp.Configuration;
 using System.Threading.Tasks;
@@ -11,11 +11,15 @@ namespace ReviewApp
     public class WebhookController : ControllerBase
     {
         private readonly IConfigurationContext _configuration;
+        private readonly IAuthorizationService _authorizationService;
 
-        public WebhookController(IConfigurationContext configuration)
+        public WebhookController(IConfigurationContext configuration, IAuthorizationService authorizationService)
         {
             Requires.NotNull(configuration, nameof(configuration));
             _configuration = configuration;
+
+            Requires.NotNull(authorizationService, nameof(authorizationService));
+            _authorizationService = authorizationService;
         }
 
         /// <summary>
@@ -26,8 +30,11 @@ namespace ReviewApp
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> ProcessCallback()
         {
+            await _authorizationService.Authorize(Request.HttpContext);
+
             // some async task here
             // ...
+
 
             return Ok();
         }
