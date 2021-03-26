@@ -14,5 +14,13 @@ namespace ReviewApp.Common
                 throw new ArgumentNullException($"{name} is null");
             }
         }
+
+        public static void NotNullOrWhiteSpace(string value, string name)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentNullException($"{name} is null/empty");
+            }
+        }
     }
 }

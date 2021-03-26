@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ReviewApp.Authorization;
 using ReviewApp.Common;
 using ReviewApp.Configuration;
+using ReviewApp.Models;
+using ReviewApp.Services;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace ReviewApp
@@ -32,9 +36,20 @@ namespace ReviewApp
         {
             await _authorizationService.Authorize(Request.HttpContext);
 
-            // some async task here
-            // ...
+            FacebookWebhookRequest request = null;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                var body = reader.ReadToEnd();
 
+                request = JsonConvert.DeserializeObject<FacebookWebhookRequest>(body);
+            }
+
+            var requestProcessor = new FacebookRequestProcessor();
+
+            // Fire and forget this service call since the response isn't dependent on the result of this
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            requestProcessor.ProcessReqeust(request);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
             return Ok();
         }

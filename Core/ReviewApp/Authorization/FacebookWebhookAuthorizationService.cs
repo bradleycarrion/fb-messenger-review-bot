@@ -41,7 +41,6 @@ namespace ReviewApp.Authorization
             {
                 string body = reader.ReadToEndAsync().Result;
 
-
                 string expectedSignature = ComputeSignature(body, _configuration.FacebookAppSecret);
 
                 if (IsSignatureValid(header, expectedSignature))
