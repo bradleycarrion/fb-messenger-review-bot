@@ -28,11 +28,6 @@ namespace ReviewApp
         {
             services.AddControllers();
             services.RegisterConfiguration();
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("FacebookWebhookAuthorization", policy =>
-                    policy.Requirements.Add(new FacebookSignatureRequirement()));
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
